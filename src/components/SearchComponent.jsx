@@ -4,10 +4,10 @@ export default function SearchComponent() {
       <div className="flex">
         <input
           type="text"
-          className="block w-auto px-1 py-1  text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+          className="block w-auto px-1 py-1  text-gray-700 bg-white border rounded-md focus:border-yellow-400 focus:ring-yellow-300 focus:outline-none focus:ring focus:ring-opacity-40"
           placeholder="Search..."
         />
-        <button className="px-1 text-white bg-blue-600 border-l rounded-l-none rounded-r-md">
+        <button className="px-1 text-white bg-[#856800] hover:bg-[#4d4012] border-l rounded-l-none rounded-r-md">
           Search
         </button>
       </div>
