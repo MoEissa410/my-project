@@ -11,7 +11,7 @@ const slides = [
 ];
 
 const Slide = ({ src, alt }) => (
-  <img src={src} alt={alt} className="w-screen h-full object-cover" />
+  <img src={src} alt={alt} className="w-full h-full object-cover" />
 );
 
 Slide.propTypes = {
@@ -75,21 +75,21 @@ const Banner = () => {
   }
 
   return (
-    <div className=" relative w-auto h-auto overflow-x-hidden" {...handlers}>
+    <div className="relative w-full h-[600px] overflow-hidden" {...handlers}>
       <div
-        className="w-[400vw] h-[600px] flex transition ease-out duration-[0.6s]	 z-10"
+        className="w-full h-full flex transition ease-out duration-[0.6s] z-10"
         style={{
-          transform: `translateX(-${current * 100}vw)`,
+          transform: `translateX(-${current * 100}%)`,
         }}
       >
         {slides.map((slide, index) => (
           <Slide key={index} src={slide} alt={`Slide ${index}`} />
         ))}
       </div>
-      <div className=" absolute top-0 left-0 flex h-full items-center justify-center px-4 focus:outline-none">
+      <div className="absolute top-0 left-0 flex h-full items-center justify-center px-4 focus:outline-none">
         <button
           onClick={goToPreviousSlide}
-          className=" ring-2 ring-Primary bg-gray-500 opacity-50 hover:bg-gray-500 hover:opacity-90 rounded-full p-4"
+          className="ring-2 ring-Primary bg-gray-500 opacity-50 hover:bg-gray-500 hover:opacity-90 rounded-full p-4"
         >
           <AiOutlineArrowLeft />
         </button>
