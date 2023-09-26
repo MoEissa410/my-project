@@ -3,7 +3,7 @@ import { Spinner } from "flowbite-react";
 
 const SpinnerJsx = () => {
   return (
-    <div className="flex justify-around">
+    <div className="flex justify-between w-full">
       <Spinner aria-label="Info spinner example" color="info" />
       <Spinner aria-label="Success spinner example" color="success" />
       <Spinner aria-label="Failure spinner example" color="failure" />

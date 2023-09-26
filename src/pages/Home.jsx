@@ -3,6 +3,7 @@ import Banner from "../components/Banner";
 import FooterE from "../components/FooterE";
 import Products from "../components/Products";
 import { walMart } from "../api/Api";
+import CartItem from "../components/headerContainer/CartItem";
 
 const Home = () => {
   return (
