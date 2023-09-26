@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SearchComponent from "./SearchComponent";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+
 import { useSelector } from "react-redux";
 import { getProduct } from "../pages/store/productSlice";
 import { Link } from "react-router-dom";
@@ -10,6 +11,7 @@ const Header = () => {
   const allProduct = useSelector(getProduct);
   let count = allProduct.length;
   //
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -61,14 +63,16 @@ const Header = () => {
         <div className=" relative cursor-pointer">
           <Link to="/cartItem">
             <AiOutlineShoppingCart className=" text-[30px]" />
-            <div className=" text-red-500 absolute top-[-8px] left-4">
-              {count}
-            </div>
+            {count > 0 && (
+              <div className=" text-red-500 absolute top-[-8px] left-4">
+                {count}
+              </div>
+            )}
           </Link>
         </div>
-        <div className=" sm:text-[10px] lg:text-base font-medium border-Primary  border-2  cursor-pointer ">
+        {/* <div className=" sm:text-[10px] lg:text-base font-medium border-Primary  border-2  cursor-pointer ">
           log in
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import Product from "./components/Product";
 import CartItem from "./components/headerContainer/CartItem";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
+import SearchResults from "./components/SearchResults";
 
 function App() {
   const queryClient = new QueryClient();
@@ -28,6 +29,8 @@ function App() {
 
               <Route path="/product/:id" element={<Product />} />
               <Route path="/cartItem" Component={CartItem} />
+              <Route path="/search-results" Component={SearchResults} />
+
               <Route />
             </Route>
           </Routes>

@@ -32,7 +32,6 @@ const Products = () => {
               <Link
                 to={{
                   pathname: `/product/${product._id}`,
-                  state: { product },
                 }}
               >
                 <ProductCard product={product} />
