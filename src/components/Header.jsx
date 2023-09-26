@@ -56,7 +56,6 @@ const Header = () => {
       </ul>
       <div className=" lg:text-3xl md:text-lg sm:text-sm font-semibold flex flex-col basis-1/5	 justify-center items-center cursor-pointer">
         <Link to="/">
-          <div> Store</div>
           <div>Dola&Zoma</div>
         </Link>
       </div>
