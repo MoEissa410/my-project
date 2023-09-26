@@ -2,10 +2,13 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { walMart } from "../api/Api";
-import { useDispatch } from "react-redux";
-import { add } from "../pages/store/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { add, getProduct } from "../pages/store/productSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Product = () => {
+  const cartProduct = useSelector(getProduct);
   const dispatch = useDispatch();
   const { id } = useParams();
   const { isLoading, data } = useQuery({
@@ -27,6 +30,16 @@ const Product = () => {
 
   const addHandler = () => {
     dispatch(add(product));
+    toast.success(" ❤️‍🔥 product add success", {
+      position: "top-right",
+      autoClose: 1300,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
 
   return (

@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProduct, removeProduct } from "../../pages/store/productSlice";
 import { Link } from "react-scroll";
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const CartItem = () => {
   const navigation = useNavigate();
   //
@@ -14,8 +15,17 @@ const CartItem = () => {
   console.log(products);
   //
   const removeHandler = (item) => {
+    toast.error("🖕 product remove", {
+      position: "top-right",
+      autoClose: 1300,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     dispatch(removeProduct(item));
-    console.log(item);
   };
 
   return (
@@ -36,7 +46,7 @@ const CartItem = () => {
               <div className="flex-grow">
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
                 <h4 className="text-lg font-semibold mb-2">{item.des}</h4>
-                <p className="text-gray-600 mb-2">Quantity: {item.quantity}</p>
+                <p className="text-gray-600 mb-2">Quantity: 1{item.quantity}</p>
                 <p className="text-gray-600">Price: ${item.price}</p>
               </div>
               <button
@@ -61,6 +71,18 @@ const CartItem = () => {
           </div>
         )}
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={1300}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

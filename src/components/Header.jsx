@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SearchComponent from "./SearchComponent";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 import { getProduct } from "../pages/store/productSlice";
 import { Link } from "react-router-dom";
@@ -75,6 +76,18 @@ const Header = () => {
           log in
         </div> */}
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={1300}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };
