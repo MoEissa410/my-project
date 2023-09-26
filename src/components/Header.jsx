@@ -55,8 +55,10 @@ const Header = () => {
         </li>
       </ul>
       <div className=" lg:text-3xl md:text-lg sm:text-sm font-semibold flex flex-col basis-1/5	 justify-center items-center cursor-pointer">
-        <div> Store</div>
-        <div>Dola&Zoma</div>
+        <Link to="/">
+          <div> Store</div>
+          <div>Dola&Zoma</div>
+        </Link>
       </div>
       <div className="flex lg:flex-row basis-2/5	 justify-around items-center ">
         <SearchComponent />
