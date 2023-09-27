@@ -34,7 +34,13 @@ const Products = () => {
                   pathname: `/product/${product._id}`,
                 }}
               >
-                <ProductCard product={product} />
+                <ProductCard
+                  product={{
+                    ...product,
+                    price: parseFloat(product.price),
+                    oldPrice: parseFloat(product.oldPrice),
+                  }}
+                />
               </Link>
             </li>
           ))}

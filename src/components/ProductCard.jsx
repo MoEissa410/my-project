@@ -6,13 +6,12 @@ import { add, getProduct } from "../pages/store/productSlice";
 const ProductCard = ({ product }) => {
   ProductCard.propTypes = {
     product: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      image: PropTypes.string,
       price: PropTypes.number.isRequired,
       _id: PropTypes.number.isRequired,
-      oldPrice: PropTypes.number.isRequired,
-
-      rating: PropTypes.number.isRequired,
+      oldPrice: PropTypes.number, // Remove .isRequired
+      rating: PropTypes.number,
     }).isRequired,
   };
   const { title, image, price, oldPrice, rating, _id } = product;

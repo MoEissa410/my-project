@@ -5,6 +5,8 @@ import { createSlice } from "@reduxjs/toolkit";
 // Load the initial cart state from local storage or set it as an empty array
 const initialCartState = JSON.parse(localStorage.getItem("cart")) || {
   product: [],
+  quantity: 0,
+  allPrice: 0,
 };
 
 export const productSlice = createSlice({
@@ -27,6 +29,7 @@ export const productSlice = createSlice({
       // Update local storage with the updated cart data
       localStorage.setItem("cart", JSON.stringify(state));
     },
+
     removeProduct: (state, action) => {
       const { _id } = action.payload;
 
@@ -39,10 +42,15 @@ export const productSlice = createSlice({
       }
       localStorage.setItem("cart", JSON.stringify(state));
     },
+    removeAllProduct: (state, action) => {
+      state.product = [];
+      localStorage.setItem("cart", JSON.stringify(state));
+    },
   },
 });
 
-export const { addAllProducts, add, removeProduct } = productSlice.actions;
+export const { removeAllProduct, addAllProducts, add, removeProduct } =
+  productSlice.actions;
 
 export const getProduct = (state) => state.product.product;
 export const AllProducts = (state) => state.product.allProducts;
