@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import SearchResults from "./components/SearchResults";
 import Credit from "./components/Credit";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ function App() {
               <Route path="/product/:id" element={<Product />} />
               <Route path="/cartItem" Component={CartItem} />
               <Route path="/credit" Component={Credit} />
+              <Route path="*" element={<PageNotFound />} />
 
               <Route path="/search-results" Component={SearchResults} />
 
