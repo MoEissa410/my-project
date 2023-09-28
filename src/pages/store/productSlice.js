@@ -65,8 +65,9 @@ export const productSlice = createSlice({
         return;
       } else {
         existingProduct.quantity = existingProduct.quantity - 1;
-        existingProduct.total =
-          existingProduct.quantity * existingProduct.price;
+        existingProduct.total = existingProduct.total = (
+          existingProduct.quantity * existingProduct.price
+        ).toFixed(2);
       }
 
       // Remove the product from the cart if it exists
