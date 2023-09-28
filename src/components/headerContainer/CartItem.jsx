@@ -20,18 +20,18 @@ const CartItem = () => {
   const products = useSelector(getProduct);
   const dispatch = useDispatch();
   const [totalAmt, setTotalAmt] = useState(0);
-  const final = useSelector(getSupTotal);
-  console.log(final);
+  // const final = useSelector(getSupTotal);
+  // console.log(final);
   //
-  // useEffect(() => {
-  //   let price = 0;
-  //   products.map((item) => {
-  //     price += item.price * item.quantity;
-  //     return price;
-  //   });
-  //   setTotalAmt(price);
-  // }, [products]);
-  //
+  useEffect(() => {
+    let price = 0;
+    products.map((item) => {
+      price += item.price * item.quantity;
+      return price;
+    });
+    setTotalAmt(price);
+  }, [products]);
+
   useEffect(() => {
     dispatch(supTotal());
   }, [products]);
@@ -146,7 +146,7 @@ const CartItem = () => {
       {products.length > 0 && (
         <div className="flex justify-around space-x-3 align-bottom pt-2">
           <div className="flex items-center font-extrabold border px-1 rounded">
-            finalTotal: ${final}
+            finalTotal: ${totalAmt.toFixed(2)}
           </div>
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
