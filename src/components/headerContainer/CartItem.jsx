@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProduct,
+  getSupTotal,
   minusOne,
   plusOne,
   removeAllProduct,
   removeProduct,
+  supTotal,
 } from "../../pages/store/productSlice";
-import { Link } from "react-scroll";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,18 +19,22 @@ const CartItem = () => {
   const navigation = useNavigate();
   const products = useSelector(getProduct);
   const dispatch = useDispatch();
-  const [totalAmt, setTotalAmt] = useState("");
+  const [totalAmt, setTotalAmt] = useState(0);
+  const final = useSelector(getSupTotal);
+  console.log(final);
   //
-
+  // useEffect(() => {
+  //   let price = 0;
+  //   products.map((item) => {
+  //     price += item.price * item.quantity;
+  //     return price;
+  //   });
+  //   setTotalAmt(price);
+  // }, [products]);
+  //
   useEffect(() => {
-    let price = 0;
-    products.map((item) => {
-      price += item.total;
-      return price;
-    });
-    setTotalAmt(price);
+    dispatch(supTotal());
   }, [products]);
-  console.log(totalAmt);
   const minusHandler = (item) => {
     dispatch(minusOne(item));
     if (item.quantity > 1) {
@@ -45,6 +50,7 @@ const CartItem = () => {
       });
     }
   };
+
   const pluseHandler = (item) => {
     if (item.quantity === 6) return;
     dispatch(plusOne(item));
@@ -73,11 +79,10 @@ const CartItem = () => {
     });
     dispatch(removeProduct(item));
   };
-
   return (
     <div className="fixed right-0 top-24 bg-white shadow-xl p-4 w-full h-full">
       <h2 className="text-lg font-semibold mb-4">Cart</h2>
-      <div className=" max-h-[500px] overflow-y-scroll hide-scroll cart-item-container">
+      <div className="max-h-[500px] overflow-y-scroll hide-scroll cart-item-container">
         {products.length > 0 ? (
           products.map((item) => (
             <div
@@ -95,15 +100,17 @@ const CartItem = () => {
                 <p className="text-gray-600 mb-2">Quantity: {item.quantity}</p>
                 <p className="text-gray-600">Price: ${item.price}</p>
                 <p className="text-gray-600 mb-2">
-                  total: ${item.total === 0 ? item.price : item.total}
+                  Total: $
+                  {item.total === 0
+                    ? item.price.toFixed(2)
+                    : item.total.toFixed(2)}
                 </p>
-
                 <div className="flex space-x-4 pt-3 text-xl">
                   <button
                     onClick={() => {
                       minusHandler(item);
                     }}
-                    className="text-red-500 font-semibold "
+                    className="text-red-500 font-semibold hover:text-[#ff0000]"
                   >
                     <IoIosRemoveCircleOutline />
                   </button>
@@ -111,7 +118,7 @@ const CartItem = () => {
                     onClick={() => {
                       pluseHandler(item);
                     }}
-                    className="text-red-500 font-semibold"
+                    className="text-red-500 font-semibold hover:text-[#ff0000]"
                   >
                     <IoIosAddCircleOutline />
                   </button>
@@ -119,7 +126,7 @@ const CartItem = () => {
               </div>
               <button
                 onClick={() => removeHandler(item)}
-                className="text-red-500 font-semibold border px-1 rounded"
+                className="text-red-500 font-semibold border px-1 rounded hover:text-[#ff0000]"
               >
                 Remove
               </button>
@@ -141,18 +148,20 @@ const CartItem = () => {
       </div>
       {products.length > 0 && (
         <div className="flex justify-around space-x-3 align-bottom pt-2">
-          <div className=" font-extrabold">finalTotal: {totalAmt}</div>
+          <div className="flex items-center font-extrabold border px-1 rounded">
+            finalTotal: ${final.toFixed(2)}
+          </div>
           <button
-            className="  bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
             onClick={() => {
               // Handle navigation to the credit page
-              // Example: navigation("/creditPage");
+             navigation("/credit");
             }}
           >
             Go to Credit
           </button>
           <button
-            className="  text-red-500 font-semibold  px-4 py-2 rounded border"
+            className="text-red-500 font-semibold  px-4 py-2 rounded border hover:text-[#ff0000]"
             onClick={() => {
               dispatch(removeAllProduct());
               toast.error("🖕 Product removed", {
@@ -167,7 +176,7 @@ const CartItem = () => {
               });
             }}
           >
-            removeAllProduct{" "}
+            Remove All Products
           </button>
         </div>
       )}

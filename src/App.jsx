@@ -11,6 +11,7 @@ import CartItem from "./components/headerContainer/CartItem";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import SearchResults from "./components/SearchResults";
+import Credit from "./components/Credit";
 
 function App() {
   const queryClient = new QueryClient();
@@ -29,6 +30,8 @@ function App() {
 
               <Route path="/product/:id" element={<Product />} />
               <Route path="/cartItem" Component={CartItem} />
+              <Route path="/credit" Component={Credit} />
+
               <Route path="/search-results" Component={SearchResults} />
 
               <Route />

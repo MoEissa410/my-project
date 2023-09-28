@@ -87,17 +87,17 @@ const Header = () => {
           <div>Dola&Zoma</div>
         </Link>
       </div>
-      <div className="flex lg:flex-row basis-2/5	 justify-around items-center ">
+      <div className="flex lg:flex-row basis-2/5	 justify-around items-center transition-all ">
         <SearchComponent />
         <div className={`${btnClasses}`} onClick={cartHandle}>
           <AiOutlineShoppingCart className=" text-[30px]" />
           {count > 0 && (
-            <div className=" bg-red-500 rounded-sm px-[1px] text-white absolute top-[-8px] left-4">
+            <div className=" transition-all bg-red-500 rounded-sm px-[1px] text-white absolute top-[-8px] left-4">
               {count}
             </div>
           )}
         </div>
-        {openCart && <Cart products={allProduct} />}
+        {openCart && <Cart products={allProduct} openCart={openCart} />}
 
         {/* <div className=" sm:text-[10px] lg:text-base font-medium border-Primary  border-2  cursor-pointer ">
           log in

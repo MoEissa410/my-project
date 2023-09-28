@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Load the initial cart state from local storage or set it as an empty array
 const initialCartState = JSON.parse(localStorage.getItem("cart")) || {
+  allProducts: [],
   product: [],
   total: 0,
 };
@@ -13,6 +14,12 @@ export const productSlice = createSlice({
   reducers: {
     addAllProducts: (state, action) => {
       state.allProducts = action.payload;
+    },
+    supTotal: (state) => {
+      state.total = 0;
+      state.product.forEach((element) => {
+        state.total += element.price * element.quantity; // Add the total of each product to the state total
+      });
     },
     add: (state, action) => {
       const { total, quantity, title, image, price, _id } = action.payload;
@@ -92,7 +99,9 @@ export const {
   addAllProducts,
   add,
   removeProduct,
+  supTotal,
 } = productSlice.actions;
+export const getSupTotal = (state) => state.product.total;
 
 export const getProduct = (state) => state.product.product;
 export const AllProducts = (state) => state.product.allProducts;
