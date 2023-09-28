@@ -101,9 +101,7 @@ const CartItem = () => {
                 <p className="text-gray-600">Price: ${item.price}</p>
                 <p className="text-gray-600 mb-2">
                   Total: $
-                  {item.total === 0
-                    ? item.price.toFixed(2)
-                    : item.total.toFixed(2)}
+                  {item.total === 0 ? item.price : item.total.toFixed(2)}
                 </p>
                 <div className="flex space-x-4 pt-3 text-xl">
                   <button
@@ -155,7 +153,7 @@ const CartItem = () => {
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
             onClick={() => {
               // Handle navigation to the credit page
-             navigation("/credit");
+              navigation("/credit");
             }}
           >
             Go to Credit

@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 import { getProduct } from "../pages/store/productSlice";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Cart from "./headerContainer/Cart";
 const Header = () => {
   // const [isScroll, setIsScroll] = useState(false);
@@ -16,6 +16,11 @@ const Header = () => {
   let count = allProduct.length;
   //
   const cartRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    setOpenCart(false); // Close the cart when navigating to another page
+  }, [location]);
 
   // Function to close the cart
 

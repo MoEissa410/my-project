@@ -26,18 +26,18 @@ const Cart = ({ products, openCart }) => {
                 />
                 <h3 className="text-lg font-semibold mt-2">{product.title}</h3>
               </div>
+              <button
+                className="block mx-auto mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                onClick={clickHandle}
+              >
+                all selected
+              </button>
             </div>
           ))
         ) : (
           <p className="text-center text-gray-600">Cart is empty</p>
         )}
       </div>
-      <button
-        className="block mx-auto mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        onClick={clickHandle}
-      >
-        all selected
-      </button>
     </div>
   );
 };
