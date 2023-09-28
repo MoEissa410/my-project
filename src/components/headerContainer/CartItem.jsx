@@ -100,8 +100,7 @@ const CartItem = () => {
                 <p className="text-gray-600 mb-2">Quantity: {item.quantity}</p>
                 <p className="text-gray-600">Price: ${item.price}</p>
                 <p className="text-gray-600 mb-2">
-                  Total: $
-                  {item.total === 0 ? item.price : item.total.toFixed(2)}
+                  Total: ${item.total === 0 ? item.price : item.total}
                 </p>
                 <div className="flex space-x-4 pt-3 text-xl">
                   <button
@@ -147,7 +146,7 @@ const CartItem = () => {
       {products.length > 0 && (
         <div className="flex justify-around space-x-3 align-bottom pt-2">
           <div className="flex items-center font-extrabold border px-1 rounded">
-            finalTotal: ${final.toFixed(2)}
+            finalTotal: ${final}
           </div>
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
