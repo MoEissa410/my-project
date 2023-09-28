@@ -5,10 +5,8 @@ import { createSlice } from "@reduxjs/toolkit";
 // Load the initial cart state from local storage or set it as an empty array
 const initialCartState = JSON.parse(localStorage.getItem("cart")) || {
   product: [],
-  quantity: 0,
-  allPrice: 0,
+  total: 0,
 };
-
 export const productSlice = createSlice({
   name: "product",
   initialState: initialCartState,
@@ -17,19 +15,57 @@ export const productSlice = createSlice({
       state.allProducts = action.payload;
     },
     add: (state, action) => {
-      const { title, image, price, _id } = action.payload;
+      const { total, quantity, title, image, price, _id } = action.payload;
       const existingProduct = state.product.find(
         (product) => product._id === _id
       );
 
       if (!existingProduct) {
-        state.product.push({ title, image, price, _id });
+        state.product.push({ total, quantity, title, image, price, _id });
+      } else {
+        existingProduct.quantity += action.payload.quantity;
+        existingProduct.total =
+          existingProduct.quantity * existingProduct.price;
+      }
+
+      // Update local storage with the updated cart data
+      localStorage.setItem("cart", JSON.stringify(state));
+    },
+    plusOne: (state, action) => {
+      const { _id } = action.payload; /* نفس العنصر*/
+      const existingProduct = state.product.find(
+        (product) => product._id === _id
+      );
+
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+        existingProduct.total =
+          existingProduct.quantity * existingProduct.price;
       }
 
       // Update local storage with the updated cart data
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
+    minusOne: (state, action) => {
+      const { _id } = action.payload;
+
+      // Find the index of the product with the given _id in the cart
+      const existingProduct = state.product.find(
+        (product) => product._id === _id
+      );
+      if (existingProduct.quantity === 1) {
+        return;
+      } else {
+        existingProduct.quantity = existingProduct.quantity - 1;
+        existingProduct.total =
+          existingProduct.quantity * existingProduct.price;
+      }
+
+      // Remove the product from the cart if it exists
+
+      localStorage.setItem("cart", JSON.stringify(state));
+    },
     removeProduct: (state, action) => {
       const { _id } = action.payload;
 
@@ -49,8 +85,14 @@ export const productSlice = createSlice({
   },
 });
 
-export const { removeAllProduct, addAllProducts, add, removeProduct } =
-  productSlice.actions;
+export const {
+  removeAllProduct,
+  minusOne,
+  plusOne,
+  addAllProducts,
+  add,
+  removeProduct,
+} = productSlice.actions;
 
 export const getProduct = (state) => state.product.product;
 export const AllProducts = (state) => state.product.allProducts;

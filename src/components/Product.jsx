@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Product = () => {
-  const cartProduct = useSelector(getProduct);
+  const productCart = useSelector(getProduct);
   const dispatch = useDispatch();
   const { id } = useParams();
   const { isLoading, data } = useQuery({
@@ -21,15 +21,26 @@ const Product = () => {
     product = data.find((p) => p._id === Number(id));
   }
 
-  console.log("Product component product:", product);
-
   if (!product) {
     return <div>Loading...</div>;
   }
   const { brand, category, des, image, oldPrice, price, title, _id } = product;
 
   const addHandler = () => {
-    dispatch(add(product));
+    dispatch(
+      add({
+        quantity: 1,
+        brand: brand,
+        category: category,
+        des: des,
+        image: image,
+        oldPrice: oldPrice,
+        price: price,
+        title: title,
+        _id: _id,
+        total: 0,
+      })
+    );
     toast.success(" ❤️‍🔥 product add success", {
       position: "top-right",
       autoClose: 1300,
@@ -41,7 +52,7 @@ const Product = () => {
       theme: "light",
     });
   };
-
+  console.log(productCart);
   return (
     <div className=" relative top-28 flex flex-col md:flex-row md:max-w-6xl mx-auto p-4 space-y-4 md:space-y-0">
       <div className="md:w-1/2">

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProduct,
+  minusOne,
+  plusOne,
   removeAllProduct,
   removeProduct,
 } from "../../pages/store/productSlice";
@@ -16,9 +18,47 @@ const CartItem = () => {
   const navigation = useNavigate();
   const products = useSelector(getProduct);
   const dispatch = useDispatch();
+  const [totalAmt, setTotalAmt] = useState("");
+  //
 
-  const minusHandler = (item) => {};
-  const pluseHandler = (item) => {};
+  useEffect(() => {
+    let price = 0;
+    products.map((item) => {
+      price += item.total;
+      return price;
+    });
+    setTotalAmt(price);
+  }, [products]);
+  console.log(totalAmt);
+  const minusHandler = (item) => {
+    dispatch(minusOne(item));
+    if (item.quantity > 1) {
+      toast.error("🖕 Product removed", {
+        position: "top-right",
+        autoClose: 1300,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+  const pluseHandler = (item) => {
+    if (item.quantity === 6) return;
+    dispatch(plusOne(item));
+    toast.success(" ❤️‍🔥 product add success", {
+      position: "top-right",
+      autoClose: 1300,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   const removeHandler = (item) => {
     toast.error("🖕 Product removed", {
@@ -52,17 +92,25 @@ const CartItem = () => {
               <div className="flex-grow">
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
                 <h4 className="text-lg font-semibold mb-2">{item.des}</h4>
-                <p className="text-gray-600 mb-2">Quantity:1 {item.quantity}</p>
+                <p className="text-gray-600 mb-2">Quantity: {item.quantity}</p>
                 <p className="text-gray-600">Price: ${item.price}</p>
+                <p className="text-gray-600 mb-2">
+                  total: ${item.total === 0 ? item.price : item.total}
+                </p>
+
                 <div className="flex space-x-4 pt-3 text-xl">
                   <button
-                    onClick={minusHandler(item)}
+                    onClick={() => {
+                      minusHandler(item);
+                    }}
                     className="text-red-500 font-semibold "
                   >
                     <IoIosRemoveCircleOutline />
                   </button>
                   <button
-                    onClick={pluseHandler(item)}
+                    onClick={() => {
+                      pluseHandler(item);
+                    }}
                     className="text-red-500 font-semibold"
                   >
                     <IoIosAddCircleOutline />
@@ -71,7 +119,7 @@ const CartItem = () => {
               </div>
               <button
                 onClick={() => removeHandler(item)}
-                className="text-red-500 font-semibold"
+                className="text-red-500 font-semibold border px-1 rounded"
               >
                 Remove
               </button>
@@ -92,7 +140,8 @@ const CartItem = () => {
         )}
       </div>
       {products.length > 0 && (
-        <div className="flex justify-center space-x-3 align-bottom pt-2">
+        <div className="flex justify-around space-x-3 align-bottom pt-2">
+          <div className=" font-extrabold">finalTotal: {totalAmt}</div>
           <button
             className="  bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
             onClick={() => {
@@ -103,7 +152,7 @@ const CartItem = () => {
             Go to Credit
           </button>
           <button
-            className="  bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="  text-red-500 font-semibold  px-4 py-2 rounded border"
             onClick={() => {
               dispatch(removeAllProduct());
               toast.error("🖕 Product removed", {
@@ -124,7 +173,7 @@ const CartItem = () => {
       )}
       <ToastContainer
         position="top-right"
-        autoClose={1300}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop
         closeOnClick
