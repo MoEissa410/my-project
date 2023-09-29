@@ -6,7 +6,7 @@ import { store, persistor } from "./pages/store/store.js";
 //index.js
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
-import { app } from "./fierBase.cofig.js";
+import { app } from "./firebase.config.js";
 //...
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
