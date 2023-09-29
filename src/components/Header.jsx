@@ -89,7 +89,7 @@ const Header = () => {
       </ul>
       <div className=" lg:text-3xl md:text-lg sm:text-sm font-semibold flex flex-col basis-1/5	 justify-center items-center cursor-pointer">
         <Link to="/">
-          <div>ff&Zoma</div>
+          <div>ff&nn</div>
         </Link>
       </div>
       <div className="flex lg:flex-row basis-2/5	 justify-around items-center transition-all ">
