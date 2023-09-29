@@ -89,7 +89,7 @@ const Header = () => {
       </ul>
       <div className=" lg:text-3xl md:text-lg sm:text-sm font-semibold flex flex-col basis-1/5	 justify-center items-center cursor-pointer">
         <Link to="/">
-          <div>Dola&Zoma</div>
+          <div>ff&Zoma</div>
         </Link>
       </div>
       <div className="flex lg:flex-row basis-2/5	 justify-around items-center transition-all ">
@@ -102,11 +102,12 @@ const Header = () => {
             </div>
           )}
         </div>
+        <div>hello</div>
         {openCart && <Cart products={allProduct} openCart={openCart} />}
 
-        <div className=" sm:text-[10px] lg:text-base font-medium border-Primary  border-2  cursor-pointer ">
+        {/* <div className=" sm:text-[10px] lg:text-base font-medium border-Primary  border-2  cursor-pointer ">
           log in
-        </div>
+        </div> */}
       </div>
       <ToastContainer
         position="top-right"
