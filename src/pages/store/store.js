@@ -6,6 +6,7 @@ import searchReducer from "./searchSlice";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 import {
+  persistStore,
   persistReducer,
   FLUSH,
   REHYDRATE,
@@ -14,13 +15,16 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import persistStore from "redux-persist/es/persistStore";
-//
 //store.js
+
+//
+
 const persistConfig = {
-  key: "counter",
+  key: "root",
+  version: 1,
   storage,
 };
+
 const reducers = combineReducers({
   product: productSlice,
   search: searchReducer,
@@ -38,4 +42,4 @@ export const store = configureStore({
     }),
 });
 
-export let persist = persistStore(store);
+export let persistor = persistStore(store);
