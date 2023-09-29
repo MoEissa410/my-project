@@ -104,9 +104,9 @@ const Header = () => {
         </div>
         {openCart && <Cart products={allProduct} openCart={openCart} />}
 
-        {/* <div className=" sm:text-[10px] lg:text-base font-medium border-Primary  border-2  cursor-pointer ">
+        <div className=" sm:text-[10px] lg:text-base font-medium border-Primary  border-2  cursor-pointer ">
           log in
-        </div> */}
+        </div>
       </div>
       <ToastContainer
         position="top-right"
