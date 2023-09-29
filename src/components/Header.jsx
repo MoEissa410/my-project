@@ -164,8 +164,7 @@ const Header = () => {
           )}
         </div>
         {openCart && <Cart products={allProduct} openCart={openCart} />}
-        {/* render user  */}
-        {<div>log in</div>}
+        <div>log in</div>
       </div>
       <ToastContainer
         position="top-right"
