@@ -87,18 +87,15 @@ const Header = () => {
     console.log(openCart);
   };
   //
-  console.log(user);
+  const name = user && user.email ? user.email.split("@")[0] : "log in";
+
   const userInfo = user ? (
     <div
       className="relative group cursor-pointer"
       onClick={() => setOpenUser(!openUser)}
     >
-      <div className="flex items-center">
-        <img
-          className="w-8 h-8 border rounded-full cursor-pointer"
-          alt={user.displayName}
-          src={user.photoURL}
-        />
+      <div className="flex flex-col items-end">
+        <p className="  rounded-md cursor-pointer">{name}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={`w-4 h-4 ml-2 transform ${
