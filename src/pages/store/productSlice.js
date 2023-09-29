@@ -11,6 +11,7 @@ const initialCartState = {
   allProducts: [],
   product: [],
   total: 0,
+  user: {},
 };
 export const productSlice = createSlice({
   name: "product",
@@ -94,6 +95,12 @@ export const productSlice = createSlice({
       state.product = [];
       // localStorage.setItem("cart", JSON.stringify(state));
     },
+    addUser: (state, action) => {
+      state.user = action.payload;
+    },
+    removeUser: (state, action) => {
+      state.user = action.payload;
+    },
   },
 });
 
@@ -105,10 +112,13 @@ export const {
   add,
   removeProduct,
   supTotal,
+  addUser,
+  removeUser,
 } = productSlice.actions;
 export const getSupTotal = (state) => state.product.total;
 
 export const getProduct = (state) => state.product.product;
 export const AllProducts = (state) => state.product.allProducts;
+export const getUser = (state) => state.product.user;
 
 export default productSlice.reducer;
