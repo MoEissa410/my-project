@@ -87,15 +87,18 @@ const Header = () => {
     console.log(openCart);
   };
   //
-  const name = user && user.email ? user.email.split("@")[0] : "log in";
-
+  console.log(user);
   const userInfo = user ? (
     <div
       className="relative group cursor-pointer"
       onClick={() => setOpenUser(!openUser)}
     >
-      <div className="flex flex-col items-end">
-        <p className="  rounded-md cursor-pointer">{name}</p>
+      <div className="flex items-center">
+        <img
+          className="w-8 h-8 border rounded-full cursor-pointer"
+          alt={user.displayName}
+          src={user.photoURL}
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={`w-4 h-4 ml-2 transform ${
@@ -164,7 +167,8 @@ const Header = () => {
           )}
         </div>
         {openCart && <Cart products={allProduct} openCart={openCart} />}
-        <div>log in</div>
+        {/* render user  */}
+        {userInfo}
       </div>
       <ToastContainer
         position="top-right"
