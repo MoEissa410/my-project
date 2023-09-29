@@ -1,9 +1,13 @@
 // productSlice.js
 
 import { createSlice } from "@reduxjs/toolkit";
-
+// const initialCartState = JSON.parse(localStorage.getItem("cart")) || {
+//   allProducts: [],
+//   product: [],
+//   total: 0,
+// };
 // Load the initial cart state from local storage or set it as an empty array
-const initialCartState = JSON.parse(localStorage.getItem("cart")) || {
+const initialCartState = {
   allProducts: [],
   product: [],
   total: 0,
@@ -36,7 +40,7 @@ export const productSlice = createSlice({
       }
 
       // Update local storage with the updated cart data
-      localStorage.setItem("cart", JSON.stringify(state));
+      // localStorage.setItem("cart", JSON.stringify(state));
     },
     plusOne: (state, action) => {
       const { _id } = action.payload; /* نفس العنصر*/
@@ -51,7 +55,7 @@ export const productSlice = createSlice({
       }
 
       // Update local storage with the updated cart data
-      localStorage.setItem("cart", JSON.stringify(state));
+      // localStorage.setItem("cart", JSON.stringify(state));
     },
 
     minusOne: (state, action) => {
@@ -72,7 +76,7 @@ export const productSlice = createSlice({
 
       // Remove the product from the cart if it exists
 
-      localStorage.setItem("cart", JSON.stringify(state));
+      // localStorage.setItem("cart", JSON.stringify(state));
     },
     removeProduct: (state, action) => {
       const { _id } = action.payload;
@@ -84,11 +88,11 @@ export const productSlice = createSlice({
         // Remove the product from the cart if it exists
         state.product.splice(index, 1);
       }
-      localStorage.setItem("cart", JSON.stringify(state));
+      // localStorage.setItem("cart", JSON.stringify(state));
     },
     removeAllProduct: (state, action) => {
       state.product = [];
-      localStorage.setItem("cart", JSON.stringify(state));
+      // localStorage.setItem("cart", JSON.stringify(state));
     },
   },
 });
