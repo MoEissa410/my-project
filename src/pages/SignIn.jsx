@@ -141,22 +141,40 @@ const SignIn = () => {
                       <p className="mb-4">Please login to your account</p>
                       {/* <!--Username input--> */}
                       <div className="relative mb-4" data-te-input-wrapper-init>
-                        <label htmlFor="email">Email</label>
                         <input
                           type="text"
                           className="peer block min-h-[auto] w-full rounded border-1  border-blue-700 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                           onChange={(e) => SetEmailInput(e.target.value)}
                         />
+                        {emailInput ? (
+                          ""
+                        ) : (
+                          <label
+                            htmlFor="email"
+                            className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:bg-white peer-focus:scale-[0.8] peer-focus:text-primary-600 peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                          >
+                            Email address
+                          </label>
+                        )}
                       </div>
 
                       <div className="relative mb-4" data-te-input-wrapper-init>
-                        <label htmlFor="password">password</label>
                         <input
                           type="password"
                           id="password" // Use a unique "id" for the input and match it with the "htmlFor" attribute in the label
                           className="peer block min-h-[auto] w-full rounded border-1 border-blue-700 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                           onChange={(e) => setPasswordInput(e.target.value)}
                         />
+                        {passwordInput ? (
+                          ""
+                        ) : (
+                          <label
+                            htmlFor="password"
+                            className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:bg-white peer-focus:scale-[0.8] peer-focus:text-primary-600 peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                          >
+                            Password
+                          </label>
+                        )}
                       </div>
 
                       {/* <!--Submit button--> */}

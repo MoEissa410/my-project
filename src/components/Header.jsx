@@ -161,10 +161,16 @@ const Header = () => {
       </ul>
       <div className=" lg:text-3xl md:text-lg sm:text-sm font-semibold flex flex-col basis-1/5	 justify-center items-center cursor-pointer">
         <Link to="/">
-          <div>Dola&Zoma</div>
+          <div>
+            <img
+              className="mx-auto w-48"
+              src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+              alt="logo"
+            />
+          </div>
         </Link>
       </div>
-      <div className="flex lg:flex-row basis-2/5	 justify-around items-center transition-all ">
+      <div className="flex lg:flex-row basis-2/5	 justify-around items-center transition-all  ">
         <SearchComponent />
         <div className={`${btnClasses}`} onClick={cartHandle}>
           <AiOutlineShoppingCart className=" text-[30px]" />
