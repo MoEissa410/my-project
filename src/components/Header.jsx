@@ -5,16 +5,42 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct, getUser, removeUser } from "../pages/store/productSlice";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillCaretDown } from "react-icons/ai";
 import Cart from "./headerContainer/Cart";
 import { getAuth, signOut } from "firebase/auth";
+import { useQuery } from "@tanstack/react-query";
+import { walMart } from "../api/Api";
+import { getSearchInput, removeSearch } from "../pages/store/searchSlice";
 const Header = () => {
   // const [isScroll, setIsScroll] = useState(false);
   const [openUser, setOpenUser] = useState(false);
-
   const [openCart, setOpenCart] = useState(false);
+  const location = useLocation();
+  const user = useSelector(getUser);
+  const navigation = useNavigate();
+  const searchQuery = useSelector(getSearchInput);
+  const [matchingProductsItmes, setMatchingProductsItmes] = useState(false);
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["products"],
+    queryFn: walMart,
+  });
+  let matchingProducts = [];
+  if (searchQuery.length > 2) {
+    matchingProducts = !isLoading
+      ? data.filter((product) =>
+          product.title.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : [];
+  }
+  useEffect(() => {
+    if (matchingProducts.length > 0) {
+      return setMatchingProductsItmes(true);
+    }
+  }, [searchQuery]);
   //
+
   const allProduct = useSelector(getProduct);
   let count = allProduct.length;
   const dispatch = useDispatch();
@@ -34,11 +60,10 @@ const Header = () => {
       });
   };
 
-  const cartRef = useRef(null);
-  const location = useLocation();
-  const user = useSelector(getUser);
   useEffect(() => {
     setOpenCart(false); // Close the cart when navigating to another page
+    setMatchingProductsItmes(false);
+    dispatch(removeSearch());
   }, [location]);
 
   // Function to close the cart
@@ -103,7 +128,10 @@ const Header = () => {
   const userInfo = user ? (
     <div
       className="relative group cursor-pointer"
-      onClick={() => setOpenUser(!openUser)}
+      onClick={() => {
+        setOpenUser(!openUser);
+        setMatchingProductsItmes(false);
+      }}
     >
       <div className="flex items-center">
         <p>{Display(user)}</p>
@@ -171,7 +199,36 @@ const Header = () => {
         </Link>
       </div>
       <div className="flex lg:flex-row basis-2/5	 justify-around items-center transition-all  ">
-        <SearchComponent />
+        <div>
+          <SearchComponent />
+          {matchingProductsItmes && (
+            <div
+              className={`w-full mx-auto gap-2 py-2  max-h-60 flex flex-col  justify-center items-center bg-white top-20 absolute left-0  z-50 overflow-y-scroll shadow-2xl scrollbar-hide cursor-pointer`}
+            >
+              {matchingProducts &&
+                matchingProducts.map((item) => (
+                  <div
+                    onClick={() => navigation(`/product/${item._id}`)}
+                    key={item._id}
+                    className="flex justify-center items-center flex-col gap-2 py-2   w-full max-w-md bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-transform duration-300 transform hover:-translate-y-1 cursor-pointer"
+                  >
+                    <div className="relative flex items-center">
+                      <img
+                        className="w-10 h-10 object-cover"
+                        src={item.image}
+                        alt="Product Image"
+                      />
+                    </div>
+                    <div className=" flex items-center">
+                      <h2 className="text-md font-semibold text-gray-800">
+                        {item.title}
+                      </h2>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          )}
+        </div>
         <div className={`${btnClasses}`} onClick={cartHandle}>
           <AiOutlineShoppingCart className=" text-[30px]" />
           {count > 0 && (

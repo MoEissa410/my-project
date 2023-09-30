@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearchengin } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { setSearchQuery } from "../pages/store/searchSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getMatchingProduct,
+  getSearchInput,
+  setSearchQuery,
+} from "../pages/store/searchSlice.js";
 import { useNavigate } from "react-router-dom";
 export default function SearchComponent() {
   const [input, setInput] = useState("");
-  const dispatch = useDispatch();
-  //
   const navigation = useNavigate();
+  const dispatch = useDispatch();
+  const searchQuery = useSelector(getSearchInput);
+  //
+  // const matchingProduct = useSelector(getMatchingProduct);
+  // console.log(matchingProduct);
+  useEffect(() => {
+    dispatch(setSearchQuery(input));
+  }, [input]);
+  useEffect(() => {
+    setInput("");
+  }, [location]);
   const inputHandler = (e) => {
     dispatch(setSearchQuery(input));
     navigation("/search-results");
