@@ -14,6 +14,7 @@ import SearchResults from "./components/SearchResults";
 import Credit from "./components/Credit";
 import PageNotFound from "./pages/PageNotFound";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 function App() {
   const queryClient = new QueryClient();
@@ -29,14 +30,14 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/about-us" element={<AboutUs />} />
-
               <Route path="/product/:id" element={<Product />} />
               <Route path="/cartItem" Component={CartItem} />
               <Route path="/credit" Component={Credit} />
               <Route path="*" element={<PageNotFound />} />
               <Route path="/search-results" Component={SearchResults} />
               <Route path="/sign-in" element={<SignIn />} />
-
+              <Route path="/sign-up" element={<SignUp />} />
+              {/* Add this line */}
               <Route />
             </Route>
           </Routes>
